@@ -4,7 +4,7 @@ public class Graph
 {
     private ArrayList<Vertex> vertices;
     private boolean isWeighted; //sets weight
-    private boolean isDirected; //means it has an linked vertex
+    private boolean isDirected; //means it is linked to another vertex
 
     public Graph(boolean inputIsWeighted, boolean inputIsDirected)
     {
@@ -13,10 +13,10 @@ public class Graph
         this.isDirected = inputIsDirected;
     }
 
-    public Graph() {
+    public Graph() { 
     }
 
-    public Vertex addVertex(String data)
+    public Vertex addVertex(String data) //creates a new Vertex
     {
         Vertex newVertex = new Vertex(data);
         this.vertices.add(newVertex);
@@ -33,7 +33,7 @@ public class Graph
         }
 
         vertex1.addEdge(vertex2, distWeight, durWeight);
-        if(!this.isDirected)
+        if(!this.isDirected) //assigns duration and direction to vertex2
         {
             vertex2.addEdge(vertex2, distWeight, durWeight);
         }
@@ -53,7 +53,7 @@ public class Graph
         this.vertices.remove(vertex);
     }
 
-    public ArrayList<Vertex> getVertices() {
+    public ArrayList<Vertex> getVertices() { //return the selected route
 		return this.vertices;
 	}
 
