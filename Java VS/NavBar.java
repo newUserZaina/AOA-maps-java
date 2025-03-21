@@ -7,9 +7,9 @@ public class NavBar {
         Dictionary<String, Vertex> previous = new Hashtable<>();
         PriorityQueue<QueueObj> queue = new PriorityQueue<>();
 
-        queue.add(new QueueObj(origin, 0));
+        queue.add(new QueueObj(origin, 0)); //automatically adds the starting location to queue
 
-        for (Vertex v : g.getVertices()) {
+        for (Vertex v : g.getVertices()) { //sets the weights of the edges to infinity for every vertex
             if (v != origin) {
                 distances.put(v.getData(), Double.MAX_VALUE);
                 durations.put(v.getData(), Integer.MAX_VALUE);
@@ -20,17 +20,17 @@ public class NavBar {
         distances.put(origin.getData(), 0.0);
         durations.put(origin.getData(), 0);
 
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty()) { //finding the shortest path
             Vertex curr = queue.poll().vertex;
             for (Edge e : curr.getEdges()) {
                 Double alternativeDist = distances.get(curr.getData()) + e.getDistWeight();
                 Integer alternativeDur = durations.get(curr.getData()) + e.getDurWeight();
                 String neighborValue = e.getEnd().getData();
                 
-                if (byDistance && alternativeDist < distances.get(neighborValue)) {
-                    distances.put(neighborValue, alternativeDist);
+                if (byDistance && alternativeDist < distances.get(neighborValue)) { //finding the edge with the smallest weight
+                    distances.put(neighborValue, alternativeDist); 
                     previous.put(neighborValue, curr);
-                    queue.add(new QueueObj(e.getEnd(), distances.get(neighborValue).intValue()));
+                    queue.add(new QueueObj(e.getEnd(), distances.get(neighborValue).intValue())); //adds Vertex to queue
                 } else if (!byDistance && alternativeDur < durations.get(neighborValue)) {
                     durations.put(neighborValue, alternativeDur);
                     previous.put(neighborValue, curr);
