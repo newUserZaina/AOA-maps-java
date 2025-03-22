@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+		.full-cont
+		{
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			width: 50%;
+		}
+		
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+		
+		.gMapsCon
+		{
+			background: #EAEAEA;
+            padding: 20px;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.map-conatiner
+		{
+			background: white;
+			border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+			height: 300px;
+		}
+		
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+		
+		.logo-2
+		{
+			width: 2px;
+			height: 2px;
+        }
+		
+		.left
+		{
+			border: 2px solid black;
+			width: 35%;
+		}
+		
+		.right 
+		{
+			margin: 10px;
+			display: flex;
+			flex-direction: column;
+			gap: 2px;
+			width: 65%;
+		}
+		
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        label {
+            font-size: 14px;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .swap-btn {
+            cursor: pointer;
+            background: #ddd;
+            border: none;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+			margin-top: 20px;
+			justify-content: space-between;
+        }
+        .route-btn {
+            background: #a78bfa;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 50%;
+			margin-top: 20px;
+        }
+        .avoid-group {
+            margin-top: 35px;
+        }
+        .avoid-btn {
+            background: black;
+            color: white;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .avoid-btn.active {
+            background: grey;
+        }
+    </style>
+</head>
+<body>
+	<div class ="full-cont">
+		<div class="container">
+			<!-- Logo -->
+			<div class="logo">
+				<img src="\assets\navBarIcon.png" alt="NavBar Logo">
+			</div>
+
+			<h2>Choose your delivery route</h2>
+			
+			<div class="input-group">
+				<div>
+					<label for="origin">Select Origin</label>
+					<select id="origin" onchange="updateDropdowns()">
+						<option value="18.0179,-76.8099">Kingston</option>
+						<option value="17.9144,-76.2189">Morant Point</option>
+						<option value="18.1766,-76.4500">Port Antonio</option>
+						<option value="18.2763,-76.7700">Annoto Bay</option>
+						<option value="18.0166,-76.9748">Spanish Town</option>
+						<option value="17.9371,-76.8410">Port Royal</option>
+						<option value="18.3654,-76.8922">Port Maria</option>
+						<option value="18.4074,-77.1031">Ocho Rios</option>
+						<option value="18.4329,-77.1973">St. Ann's Bay</option>
+						<option value="18.4931,-77.6580">Falmouth</option>
+						<option value="18.4713,-77.9228">Montego Bay</option>
+						<option value="18.4504,-78.1763">Lucea</option>
+						<option value="18.2788,-78.3444">Negril</option>
+						<option value="17.7891,-77.2692">Alley</option>
+						<option value="18.0501,-77.7049">Santa Cruz</option>
+						<option value="18.0336,-77.8567">Black River</option>
+						<option value="18.2269,-78.1320">Savanna La Mar</option>
+						<option value="18.1767,-77.0866">Ewarton</option>
+						<option value="18.1736,-77.4903">Christiana</option>
+						<option value="17.9668,-77.2407">May Pen</option>
+						<option value="18.0383,-77.5074">Mandeville</option>
+					</select>
+				</div>
+				<button class="swap-btn" onclick="swapLocations()">↔</button>
+				<div>
+					<label for="destination">Select Destination</label>
+					<select id="destination" onchange="updateDropdowns()">
+						<option value="18.0179,-76.8099">Kingston</option>
+						<option value="17.9144,-76.2189">Morant Point</option>
+						<option value="18.1766,-76.4500">Port Antonio</option>
+						<option value="18.2763,-76.7700">Annoto Bay</option>
+						<option value="18.0166,-76.9748">Spanish Town</option>
+						<option value="17.9371,-76.8410">Port Royal</option>
+						<option value="18.3654,-76.8922">Port Maria</option>
+						<option value="18.4074,-77.1031">Ocho Rios</option>
+						<option value="18.4329,-77.1973">St. Ann's Bay</option>
+						<option value="18.4931,-77.6580">Falmouth</option>
+						<option value="18.4713,-77.9228">Montego Bay</option>
+						<option value="18.4504,-78.1763">Lucea</option>
+						<option value="18.2788,-78.3444">Negril</option>
+						<option value="17.7891,-77.2692">Alley</option>
+						<option value="18.0501,-77.7049">Santa Cruz</option>
+						<option value="18.0336,-77.8567">Black River</option>
+						<option value="18.2269,-78.1320">Savanna La Mar</option>
+						<option value="18.1767,-77.0866">Ewarton</option>
+						<option value="18.1736,-77.4903">Christiana</option>
+						<option value="17.9668,-77.2407">May Pen</option>
+						<option value="18.0383,-77.5074">Mandeville</option>
+					</select>
+				</div>
+				<button class="route-btn" onclick="calculateRoute()">📍</button>
+			</div>
+
+			<div class="avoid-group">
+				<span>Avoid (Optional)</span>
+				<button class="avoid-btn" onclick="toggleAvoid(this)">Tolls</button>
+				<button class="avoid-btn" onclick="toggleAvoid(this)">Highways</button>
+				<button class="avoid-btn" onclick="toggleAvoid(this)">Hilly</button>
+				<button class="avoid-btn" onclick="toggleAvoid(this)">Inner-city</button>
+			</div>
+		</div>
+		<div class ="gMapsCon">
+			<div class="left">
+				<div class ="inside-left">
+					<div><h5>Route</h5></div>
+					<div><h5>AI Route</h5></div>
+				</div>
+			</div>
+			<div class= "right"> 
+				<div class ="map-conatiner"	>
+					
+				</div>
+				
+				<div class ="logo-2">
+					<img src="\assets\google logo.png" alt="google Logo" >
+				</div>
+			</div>
+			
+			
+	</div>
+    <script>
+        function toggleAvoid(button) {
+            button.classList.toggle("active");
+        }
+		
+		function swapLocations() {
+			let origin = document.getElementById("origin");
+			let destination = document.getElementById("destination");
+
+			// Swap values
+			let tempValue = origin.value;
+			let tempText = origin.options[origin.selectedIndex].text;
+
+			origin.value = destination.value;
+			origin.options[origin.selectedIndex].text = destination.options[destination.selectedIndex].text;
+
+			destination.value = tempValue;
+			destination.options[destination.selectedIndex].text = tempText;
+
+			// Update dropdown options to reflect new selections
+			updateDropdowns();
+		}
+
+		function updateDropdowns() {
+			let origin = document.getElementById("origin");
+			let destination = document.getElementById("destination");
+
+			let originValue = origin.value;
+			let destinationValue = destination.value;
+
+			for (let option of destination.options) {
+				option.hidden = option.value === originValue;
+			}
+
+			for (let option of origin.options) {
+				option.hidden = option.value === destinationValue;
+			}
+		}
+
+		//connecting back to front
+		
+		// Run updateDropdowns when the page loads to hide initially selected values
+		window.onload = updateDropdowns;
+
+
+        window.onload = populateDropdowns;
+    </script>
+</body>
+</html>
